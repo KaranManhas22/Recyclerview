@@ -2,4 +2,9 @@
     <string name="app_name">Recycler view</string>
     <string name="name">karan</string>
     <string name="phone_number">Phone number</string>
+    <string name="add">add\n</string>
+    <string name="names">names\n\n</string>
+    <string name="enter_the_name">Enter the name</string>
+    <string name="type_here">Type here</string>
+    <string name="click_to_add">Click to add</string>
 </resources>

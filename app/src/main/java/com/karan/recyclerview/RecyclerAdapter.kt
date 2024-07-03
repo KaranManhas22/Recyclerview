@@ -1,22 +1,19 @@
 package com.karan.recyclerview
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.ViewHolder
-import com.google.android.material.textfield.TextInputLayout.LengthCounter
-import kotlinx.coroutines.withContext
 
-class RecyclerAdapter(var item:Int) : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
-    var counter =0
-
+class RecyclerAdapter(var item: ArrayList<String>, private var adapterInterface: AdapterInterface): RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
 
     class ViewHolder(var view: View) : RecyclerView.ViewHolder(view) {
         val name1: TextView = view.findViewById(R.id.name)
         val number1: TextView = view.findViewById(R.id.number)
+        var btndel:Button=view.findViewById(R.id.btnDel)
+        var btnupdate:Button=view.findViewById(R.id.btnupdate)
 
 
     }
@@ -28,19 +25,30 @@ class RecyclerAdapter(var item:Int) : RecyclerView.Adapter<RecyclerAdapter.ViewH
     }
 
     override fun onBindViewHolder(holder: RecyclerAdapter.ViewHolder, position: Int) {
+        holder.name1.setText(item[position])
+        holder.number1.setText(item[position])
 
 
-        holder.name1.setText(position.toString())
-        holder.number1.setText(position.toString())
+        holder.btnupdate.setOnClickListener {
+            adapterInterface.Update_data(position)
+
+        }
+        holder.btndel.setOnClickListener {
+            adapterInterface.Delete_data(position)
+        }
 
     }
+
 
     override fun getItemCount(): Int {
-        return item
+        return item.size
+
     }
-    fun Addvalue(aditionvalue: Int) {
+    fun Addvalue(aditionvalue: ArrayList<String>) {
         item = aditionvalue
         notifyDataSetChanged()
     }
 
-}
+
+    }
+
