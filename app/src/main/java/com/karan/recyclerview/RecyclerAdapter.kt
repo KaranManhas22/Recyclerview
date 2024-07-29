@@ -46,6 +46,7 @@ class RecyclerAdapter(var item: ArrayList<String>, private var adapterInterface:
     }
     fun Addvalue(aditionvalue: ArrayList<String>) {
         item = aditionvalue
+        aditionvalue+1
         notifyDataSetChanged()
     }
 

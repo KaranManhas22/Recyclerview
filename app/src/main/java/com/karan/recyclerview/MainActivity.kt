@@ -17,7 +17,6 @@ class MainActivity : AppCompatActivity(), AdapterInterface {
 
     var binding: ActivityMainBinding? = null
     var item = arrayListOf<String>("C", "c++", "java")
-
     var recyclerAdapter = RecyclerAdapter(item, this)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,14 +29,12 @@ class MainActivity : AppCompatActivity(), AdapterInterface {
             insets
         }
 
-
         var linearLayoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         binding?.recycleview?.layoutManager = linearLayoutManager
         binding?.recycleview?.adapter = recyclerAdapter
-
         binding?.btnfloating?.setOnClickListener {
-
             recyclerAdapter.Addvalue(item)
+            recyclerAdapter.notifyDataSetChanged()
             Toast.makeText(this, "value is added", Toast.LENGTH_SHORT).show()
         }
     }
@@ -60,9 +57,7 @@ class MainActivity : AppCompatActivity(), AdapterInterface {
             if (dialogBinding.etname.text.toString().isNullOrEmpty()) {
                 dialogBinding.etname.error = "Enter Name"
             } else {
-
                 item[position] = dialogBinding.etname.text.toString()
-
                 recyclerAdapter.notifyDataSetChanged()
                 update_dialog.dismiss()
             }
@@ -75,7 +70,7 @@ class MainActivity : AppCompatActivity(), AdapterInterface {
             setPositiveButton("yes")
             { _, _ ->
                 item.removeAt(position)
-
+                recyclerAdapter.notifyDataSetChanged()
             }
             setNegativeButton("No")
             { _, _ ->
@@ -84,8 +79,6 @@ class MainActivity : AppCompatActivity(), AdapterInterface {
             setCancelable(false)
         }
             .show()
-
-        recyclerAdapter.notifyDataSetChanged()
     }
 }
 
